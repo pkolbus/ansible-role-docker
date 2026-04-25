@@ -52,6 +52,8 @@ docker_apt_ansible_distribution: "{{ 'ubuntu' if ansible_facts.distribution in [
 # docker_apt_distribution_release is a workaround for OS releases that are still in development
 # or do not match a Debian/Ubuntu codename, and is only necessary until Docker officially supports them.
 docker_apt_distribution_release: "{{ ansible_facts.distribution_release }}"
+# docker_apt_repo_url can be changed if you need to point at an internal mirror or cache.
+docker_apt_repo_url: "{{ docker_repo_url }}/{{ docker_apt_ansible_distribution | lower }}"
 docker_apt_gpg_key: "{{ docker_repo_url }}/{{ docker_apt_ansible_distribution | lower }}/gpg"
 docker_apt_filename: "docker"
 

@@ -95,6 +95,7 @@ The main Docker repo URL, common between Debian and RHEL systems.
 ```yaml
 docker_apt_release_channel: stable
 docker_apt_ansible_distribution: "{{ 'ubuntu' if ansible_facts.distribution in ['Pop!_OS', 'Linux Mint'] else ansible_facts.distribution }}"
+docker_apt_repo_url: "{{ docker_repo_url }}/{{ docker_apt_ansible_distribution | lower }}"
 docker_apt_gpg_key: "{{ docker_repo_url }}/{{ docker_apt_ansible_distribution | lower }}/gpg"
 docker_apt_filename: "docker"
 docker_apt_distribution_release: "{{ ansible_facts.distribution_release }}"
@@ -106,6 +107,7 @@ docker_apt_distribution_release: "{{ ansible_facts.distribution_release }}"
 
 Similarly, `docker_apt_distribution_release` is a workaround for OS releases that are still in development or do not match a Debian/Ubuntu codename, and is only necessary until Docker officially supports them.
 
+You can change `docker_apt_repo_url` if you need to point Debian or Ubuntu systems at an internal mirror or cache.
 You can change `docker_apt_gpg_key` to a different url if you are behind a firewall or provide a trustworthy mirror.
 `docker_apt_filename` controls the name of the source list file created in `sources.list.d`. If you are upgrading from an older (<7.0.0) version of this role, you should change this to the name of the existing file (e.g. `download_docker_com_linux_debian` on Debian) to avoid conflicting lists.
 
